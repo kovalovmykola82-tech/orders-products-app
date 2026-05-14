@@ -1,0 +1,115 @@
+.navigation-menu {
+  width: 250px;
+  min-height: 100vh;
+  padding: 24px 18px;
+  background: #ffffff;
+  box-shadow: 2px 0 16px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+
+  &__logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1abc9c;
+    margin-bottom: 32px;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #edf0f4;
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #1abc9c;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__user-name {
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  &__user-email {
+    max-width: 150px;
+    font-size: 12px;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__link {
+    position: relative;
+    padding: 12px 12px 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #64748b;
+    font-weight: 600;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background: #f1f5f9;
+      color: #1f2937;
+    }
+
+    &--active {
+      background: #e8f8f5;
+      color: #14967d;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        bottom: 10px;
+        width: 4px;
+        border-radius: 999px;
+        background: #1abc9c;
+      }
+    }
+  }
+
+  &__logout {
+    margin-top: auto;
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+  }
+}

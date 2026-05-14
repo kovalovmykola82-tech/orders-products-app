@@ -1,0 +1,36 @@
+.top-menu {
+  height: 72px;
+  padding: 0 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #edf0f4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #64748b;
+    font-size: 14px;
+  }
+
+  &__time {
+    font-weight: 700;
+    color: #1abc9c;
+  }
+
+  &__sessions {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 600;
+  }
+}

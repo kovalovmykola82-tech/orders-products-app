@@ -1,9 +1,12 @@
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute/ProtectedRoute";
+import { AppLayout } from "@/components/layout/AppLayout/AppLayout";
 
 export default function OrdersPage() {
   return (
     <ProtectedRoute>
-      <main>Orders page</main>
+      <AppLayout>
+        <h1>Приходы</h1>
+      </AppLayout>
     </ProtectedRoute>
   );
 }
