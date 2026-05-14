@@ -1,13 +1,68 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String?
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Order {
+  id          Int       @id @default(autoincrement())
+  title       String
+  date        DateTime
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("orders")
+}
+
+model Product {
+  id             Int      @id @default(autoincrement())
+  serialNumber   String   @map("serial_number")
+  isNew          Boolean  @default(true) @map("is_new")
+  photo          String?
+  title          String
+  type           String
+  specification  String
+  guaranteeStart DateTime @map("guarantee_start")
+  guaranteeEnd   DateTime @map("guarantee_end")
+  date           DateTime
+
+  orderId Int   @map("order_id")
+  order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  prices Price[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([orderId])
+  @@map("products")
+}
+
+model Price {
+  id        Int     @id @default(autoincrement())
+  value     Decimal @db.Decimal(10, 2)
+  symbol    String
+  isDefault Boolean @default(false) @map("is_default")
+
+  productId Int     @map("product_id")
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("prices")
 }
