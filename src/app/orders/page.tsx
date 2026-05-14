@@ -1,3 +1,9 @@
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute/ProtectedRoute";
+
 export default function OrdersPage() {
-  return <main>Orders page</main>;
+  return (
+    <ProtectedRoute>
+      <main>Orders page</main>
+    </ProtectedRoute>
+  );
 }
