@@ -1,0 +1,39 @@
+.product-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__label {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__select {
+    min-width: 240px;
+    height: 42px;
+    border: 1px solid #dbe3eb;
+    border-radius: 10px;
+    padding: 0 44px 0 14px;
+    background-color: #ffffff;
+    background-image: linear-gradient(45deg, transparent 50%, #64748b 50%),
+      linear-gradient(135deg, #64748b 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) 18px,
+      calc(100% - 14px) 18px;
+    background-size:
+      6px 6px,
+      6px 6px;
+    background-repeat: no-repeat;
+    color: #1f2937;
+    font-weight: 600;
+    outline: none;
+    appearance: none;
+
+    &:focus {
+      border-color: #1abc9c;
+      box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.12);
+    }
+  }
+}

@@ -1,0 +1,125 @@
+.product-card {
+  min-height: 76px;
+  padding: 16px 20px;
+  border: 1px solid #edf0f4;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  display: grid;
+  grid-template-columns:
+    18px
+    52px
+    minmax(180px, 1.3fr)
+    minmax(140px, 0.8fr)
+    minmax(180px, 0.9fr)
+    minmax(120px, 0.7fr)
+    minmax(180px, 1fr);
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+
+  &__status-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    &--new {
+      background: #c3d825;
+    }
+
+    &--used {
+      background: #263b4a;
+    }
+  }
+
+  &__image {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__main,
+  &__meta,
+  &__guarantee,
+  &__prices,
+  &__order {
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1f2937;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__serial {
+    margin: 0;
+    font-size: 13px;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__meta,
+  &__guarantee,
+  &__prices {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  &__type {
+    font-weight: 700;
+    color: #1f2937;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__specification {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__prices {
+    font-weight: 700;
+    color: #475569;
+  }
+
+  &__prices span,
+  &__guarantee span {
+    white-space: nowrap;
+  }
+
+  &__order {
+    color: #607d8b;
+    font-weight: 600;
+  }
+
+  &__order span {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

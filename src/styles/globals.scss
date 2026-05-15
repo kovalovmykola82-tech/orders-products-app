@@ -11,6 +11,9 @@ body {
 body {
   background: #f5f7fa;
   color: #1f2937;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button,
@@ -22,6 +25,11 @@ textarea {
 
 button {
   cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .orders-page {
@@ -67,6 +75,59 @@ button {
     display: flex;
     flex-direction: column;
     gap: 14px;
+  }
+
+  &__state {
+    margin: 0;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #64748b;
+
+    &--error {
+      color: #dc2626;
+    }
+  }
+}
+
+.products-page {
+  &__header {
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  &__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  &__count {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #1abc9c;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   &__state {
