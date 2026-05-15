@@ -1,4 +1,25 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: orders-products-app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: mysql://app_user:app_password@mysql:3306/orders_products_db
+      JWT_SECRET: dev_secret_for_test_task
+      JWT_EXPIRES_IN: 1d
+      NEXT_PUBLIC_APP_NAME: Orders Products App
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: sh -c "npm run db:push && npm run db:seed && npm run start"
+
   mysql:
     image: mysql:8.0
     container_name: orders-products-mysql
@@ -12,6 +33,11 @@ services:
       - "3307:3306"
     volumes:
       - orders_products_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "app_user", "-papp_password"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   adminer:
     image: adminer:latest
@@ -20,7 +46,8 @@ services:
     ports:
       - "8081:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
 volumes:
   orders_products_mysql_data:
