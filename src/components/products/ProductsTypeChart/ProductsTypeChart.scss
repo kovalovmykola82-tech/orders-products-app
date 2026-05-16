@@ -1,0 +1,30 @@
+.products-type-chart {
+  padding: 24px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e9ef;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+
+  &__header {
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  &__description {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: #7b8794;
+  }
+
+  &__body {
+    width: 100%;
+    min-height: 240px;
+  }
+}

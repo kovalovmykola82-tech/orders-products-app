@@ -6,16 +6,19 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute/ProtectedRoute"
 import { AppLayout } from "@/components/layout/AppLayout/AppLayout";
 import { ProductCard } from "@/components/products/ProductCard/ProductCard";
 import { ProductFilter } from "@/components/products/ProductFilter/ProductFilter";
+import { ProductsTypeChart } from "@/components/products/ProductsTypeChart/ProductsTypeChart";
 import { useGetProductsQuery } from "@/store/api/productsApi";
 
 export default function ProductsPage() {
   const [selectedType, setSelectedType] = useState("");
 
-  const { data: products = [], isLoading, isError } = useGetProductsQuery(
-    selectedType || undefined,
-  );
+  const {
+    data: products = [],
+    isLoading,
+    isError,
+  } = useGetProductsQuery(selectedType || undefined);
 
-  const { data: allProducts = [] } = useGetProductsQuery(undefined);
+  const { data: allProducts = [], isError: isAllProductsError } = useGetProductsQuery(undefined);
 
   const productTypes = useMemo(() => {
     return Array.from(new Set(allProducts.map((product) => product.type))).sort();
@@ -37,6 +40,9 @@ export default function ProductsPage() {
               onChange={setSelectedType}
             />
           </div>
+          {!isAllProductsError && allProducts.length > 0 && (
+            <ProductsTypeChart products={allProducts} />
+          )}
 
           {isLoading && <p className="products-page__state">Загрузка продуктов...</p>}
 
