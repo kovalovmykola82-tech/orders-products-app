@@ -1,17 +1,38 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute/ProtectedRoute";
 import { AppLayout } from "@/components/layout/AppLayout/AppLayout";
-import { DeleteOrderModal } from "@/components/orders/DeleteOrderModal/DeleteOrderModal";
 import { OrderCard } from "@/components/orders/OrderCard/OrderCard";
-import { OrderDetails } from "@/components/orders/OrderDetails/OrderDetails";
 import {
   Order,
   useDeleteOrderMutation,
   useGetOrdersQuery,
 } from "@/store/api/ordersApi";
+
+const OrderDetails = dynamic(
+  () =>
+    import("@/components/orders/OrderDetails/OrderDetails").then(
+      (module) => module.OrderDetails,
+    ),
+  {
+    loading: () => <p className="orders-page__state">Загрузка деталей прихода...</p>,
+    ssr: false,
+  },
+);
+
+const DeleteOrderModal = dynamic(
+  () =>
+    import("@/components/orders/DeleteOrderModal/DeleteOrderModal").then(
+      (module) => module.DeleteOrderModal,
+    ),
+  {
+    loading: () => null,
+    ssr: false,
+  },
+);
 
 export default function OrdersPage() {
   const { data: orders = [], isLoading, isError } = useGetOrdersQuery();
@@ -85,12 +106,14 @@ export default function OrdersPage() {
           )}
         </section>
 
-        <DeleteOrderModal
-          order={orderToDelete}
-          isLoading={isDeleting}
-          onClose={() => setOrderToDelete(null)}
-          onConfirm={handleConfirmDelete}
-        />
+        {orderToDelete && (
+          <DeleteOrderModal
+            order={orderToDelete}
+            isLoading={isDeleting}
+            onClose={() => setOrderToDelete(null)}
+            onConfirm={handleConfirmDelete}
+          />
+        )}
       </AppLayout>
     </ProtectedRoute>
   );
