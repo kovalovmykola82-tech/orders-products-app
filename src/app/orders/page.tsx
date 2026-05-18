@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute/ProtectedRoute";
 import { AppLayout } from "@/components/layout/AppLayout/AppLayout";
 import { OrderCard } from "@/components/orders/OrderCard/OrderCard";
+import { useTranslation } from "@/i18n/I18nProvider";
 import {
   Order,
   useDeleteOrderMutation,
@@ -18,7 +19,7 @@ const OrderDetails = dynamic(
       (module) => module.OrderDetails,
     ),
   {
-    loading: () => <p className="orders-page__state">Загрузка деталей прихода...</p>,
+    loading: () => <OrderDetailsLoading />,
     ssr: false,
   },
 );
@@ -34,7 +35,14 @@ const DeleteOrderModal = dynamic(
   },
 );
 
+const OrderDetailsLoading = () => {
+  const { t } = useTranslation();
+
+  return <p className="orders-page__state">{t.orders.loadingDetails}</p>;
+};
+
 export default function OrdersPage() {
+  const { t } = useTranslation();
   const { data: orders = [], isLoading, isError } = useGetOrdersQuery();
   const [deleteOrder, { isLoading: isDeleting }] = useDeleteOrderMutation();
 
@@ -68,15 +76,15 @@ export default function OrdersPage() {
       <AppLayout>
         <section className="orders-page">
           <div className="orders-page__header">
-            <h1 className="orders-page__title">Приходы</h1>
+            <h1 className="orders-page__title">{t.orders.title}</h1>
             <span className="orders-page__count">{orders.length}</span>
           </div>
 
-          {isLoading && <p className="orders-page__state">Загрузка приходов...</p>}
+          {isLoading && <p className="orders-page__state">{t.orders.loading}</p>}
 
           {isError && (
             <p className="orders-page__state orders-page__state--error">
-              Не удалось загрузить приходы.
+              {t.orders.error}
             </p>
           )}
 

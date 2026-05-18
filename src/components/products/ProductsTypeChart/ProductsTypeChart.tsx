@@ -10,6 +10,7 @@ import {
   YAxis,
 } from "recharts";
 
+import { useTranslation } from "@/i18n/I18nProvider";
 import type { Product } from "@/store/api/productsApi";
 
 import "./ProductsTypeChart.scss";
@@ -19,6 +20,8 @@ type ProductsTypeChartProps = {
 };
 
 export const ProductsTypeChart = ({ products }: ProductsTypeChartProps) => {
+  const { t } = useTranslation();
+
   const data = Object.values(
     products.reduce<Record<string, { type: string; count: number }>>((acc, product) => {
       if (!acc[product.type]) {
@@ -41,10 +44,8 @@ export const ProductsTypeChart = ({ products }: ProductsTypeChartProps) => {
   return (
     <section className="products-type-chart">
       <div className="products-type-chart__header">
-        <h2 className="products-type-chart__title">Статистика по типам продуктов</h2>
-        <p className="products-type-chart__description">
-          Количество продуктов, сгруппированное по типу
-        </p>
+        <h2 className="products-type-chart__title">{t.chart.title}</h2>
+        <p className="products-type-chart__description">{t.chart.description}</p>
       </div>
 
       <div className="products-type-chart__body">
@@ -54,7 +55,7 @@ export const ProductsTypeChart = ({ products }: ProductsTypeChartProps) => {
             <XAxis dataKey="type" />
             <YAxis allowDecimals={false} />
             <Tooltip />
-            <Bar dataKey="count" name="Количество" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="count" name={t.chart.count} radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

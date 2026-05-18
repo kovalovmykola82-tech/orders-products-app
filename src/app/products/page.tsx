@@ -7,6 +7,7 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute/ProtectedRoute"
 import { AppLayout } from "@/components/layout/AppLayout/AppLayout";
 import { ProductCard } from "@/components/products/ProductCard/ProductCard";
 import { ProductFilter } from "@/components/products/ProductFilter/ProductFilter";
+import { useTranslation } from "@/i18n/I18nProvider";
 import { useGetProductsQuery } from "@/store/api/productsApi";
 
 const ProductsTypeChart = dynamic(
@@ -15,12 +16,19 @@ const ProductsTypeChart = dynamic(
       (module) => module.ProductsTypeChart,
     ),
   {
-    loading: () => <p className="products-page__state">Загрузка графика...</p>,
+    loading: () => <ProductsChartLoading />,
     ssr: false,
   },
 );
 
+const ProductsChartLoading = () => {
+  const { t } = useTranslation();
+
+  return <p className="products-page__state">{t.products.loadingChart}</p>;
+};
+
 export default function ProductsPage() {
+  const { t } = useTranslation();
   const [selectedType, setSelectedType] = useState("");
   const [isChartVisible, setIsChartVisible] = useState(false);
 
@@ -46,7 +54,7 @@ export default function ProductsPage() {
         <section className="products-page">
           <div className="products-page__header">
             <div className="products-page__title-wrap">
-              <h1 className="products-page__title">Продукты</h1>
+              <h1 className="products-page__title">{t.products.title}</h1>
               <span className="products-page__count">{products.length}</span>
             </div>
 
@@ -57,7 +65,7 @@ export default function ProductsPage() {
                 onClick={handleToggleChart}
                 disabled={isAllProductsError || allProducts.length === 0}
               >
-                {isChartVisible ? "Скрыть график" : "Показать график"}
+                {isChartVisible ? t.products.hideChart : t.products.showChart}
               </button>
 
               <ProductFilter
@@ -72,16 +80,16 @@ export default function ProductsPage() {
             <ProductsTypeChart products={allProducts} />
           )}
 
-          {isLoading && <p className="products-page__state">Загрузка продуктов...</p>}
+          {isLoading && <p className="products-page__state">{t.products.loading}</p>}
 
           {isError && (
             <p className="products-page__state products-page__state--error">
-              Не удалось загрузить продукты.
+              {t.products.error}
             </p>
           )}
 
           {!isLoading && !isError && products.length === 0 && (
-            <p className="products-page__state">Продукты не найдены.</p>
+            <p className="products-page__state">{t.products.empty}</p>
           )}
 
           {!isLoading && !isError && products.length > 0 && (
