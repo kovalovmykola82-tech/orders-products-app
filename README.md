@@ -6,7 +6,7 @@ The project was implemented as a test task and demonstrates a fullstack React/Ne
 
 ## Live Demo
 
-Live demo: will be added after deployment.
+Live demo: https://orders-products-app-production-2c53.up.railway.app
 
 ## Test Account
 
