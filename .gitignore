@@ -64,3 +64,6 @@ coverage
 
 # OS
 .DS_Store
+
+# Keep environment example file in repository
+!.env.example
