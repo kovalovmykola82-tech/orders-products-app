@@ -18,14 +18,18 @@
   }
 
   &__title {
+    display: -webkit-box;
     max-width: 340px;
     margin: 0 0 6px;
     font-size: 20px;
     font-weight: 700;
     color: #1f2937;
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   &__subtitle {
@@ -37,6 +41,7 @@
   &__close {
     width: 34px;
     height: 34px;
+    flex-shrink: 0;
     border: 0;
     border-radius: 50%;
     background: #f1f5f9;
@@ -62,7 +67,7 @@
     padding: 16px 22px;
     border-bottom: 1px solid #f1f5f9;
     display: grid;
-    grid-template-columns: 14px minmax(0, 1fr) auto;
+    grid-template-columns: 14px minmax(0, 1fr) minmax(90px, auto);
     align-items: center;
     gap: 14px;
 
@@ -74,6 +79,7 @@
   &__status {
     width: 10px;
     height: 10px;
+    flex-shrink: 0;
     border-radius: 50%;
 
     &--new {
@@ -85,11 +91,14 @@
     }
   }
 
-  &__product-main {
+  &__product-main,
+  &__product-prices {
     min-width: 0;
   }
 
   &__product-title {
+    display: block;
+    max-width: 100%;
     margin: 0 0 4px;
     font-size: 15px;
     font-weight: 700;
@@ -114,6 +123,13 @@
     color: #475569;
     font-weight: 600;
   }
+
+  &__product-prices span {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 @keyframes order-details-slide-in {
@@ -125,5 +141,47 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .order-details {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+
+    &__title {
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .order-details {
+    animation: none;
+
+    &__header {
+      padding: 18px;
+    }
+
+    &__product {
+      padding: 14px 18px;
+      grid-template-columns: 14px minmax(0, 1fr);
+      align-items: flex-start;
+    }
+
+    &__product-title {
+      display: -webkit-box;
+      white-space: normal;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    &__product-prices {
+      grid-column: 2 / 3;
+      align-items: flex-start;
+      margin-top: 6px;
+    }
   }
 }

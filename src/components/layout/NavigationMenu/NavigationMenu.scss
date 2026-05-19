@@ -8,10 +8,10 @@
   flex-direction: column;
 
   &__logo {
+    margin-bottom: 32px;
     font-size: 22px;
     font-weight: 700;
     color: #1abc9c;
-    margin-bottom: 32px;
   }
 
   &__user {
@@ -26,6 +26,7 @@
   &__avatar {
     width: 48px;
     height: 48px;
+    flex-shrink: 0;
     border-radius: 50%;
     background: #1abc9c;
     color: #ffffff;
@@ -110,6 +111,61 @@
     &:hover {
       background: #fee2e2;
       color: #dc2626;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .navigation-menu {
+    width: 100%;
+    min-height: auto;
+    padding: 16px 14px;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+
+    &__logo {
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    &__user {
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    &__avatar {
+      width: 42px;
+      height: 42px;
+    }
+
+    &__user-email {
+      max-width: 220px;
+    }
+
+    &__nav {
+      flex-direction: row;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    &__link {
+      flex-shrink: 0;
+      padding: 10px 14px;
+      white-space: nowrap;
+
+      &--active::before {
+        left: 8px;
+        right: 8px;
+        top: auto;
+        bottom: 0;
+        width: auto;
+        height: 3px;
+      }
+    }
+
+    &__logout {
+      width: 100%;
+      margin-top: 16px;
     }
   }
 }

@@ -1,4 +1,5 @@
 .product-card {
+  width: 100%;
   min-height: 76px;
   padding: 16px 20px;
   border: 1px solid #edf0f4;
@@ -9,11 +10,11 @@
   grid-template-columns:
     18px
     52px
-    minmax(180px, 1.3fr)
-    minmax(140px, 0.8fr)
-    minmax(180px, 0.9fr)
-    minmax(120px, 0.7fr)
-    minmax(180px, 1fr);
+    minmax(0, 1.4fr)
+    minmax(0, 1fr)
+    minmax(0, 1fr)
+    minmax(0, 0.8fr)
+    minmax(0, 1fr);
   align-items: center;
   gap: 16px;
   overflow: hidden;
@@ -27,6 +28,7 @@
   &__status {
     width: 10px;
     height: 10px;
+    flex-shrink: 0;
     border-radius: 50%;
 
     &--new {
@@ -41,6 +43,7 @@
   &__image {
     width: 42px;
     height: 42px;
+    flex-shrink: 0;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: #f8fafc;
@@ -55,6 +58,7 @@
   &__prices,
   &__order {
     min-width: 0;
+    overflow: hidden;
   }
 
   &__title {
@@ -62,18 +66,12 @@
     font-size: 15px;
     font-weight: 700;
     color: #1f2937;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   &__serial {
     margin: 0;
     font-size: 13px;
     color: #94a3b8;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   &__meta,
@@ -89,15 +87,6 @@
   &__type {
     font-weight: 700;
     color: #1f2937;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &__specification {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   &__prices {
@@ -105,21 +94,132 @@
     color: #475569;
   }
 
-  &__prices span,
-  &__guarantee span {
-    white-space: nowrap;
-  }
-
   &__order {
     color: #607d8b;
     font-weight: 600;
   }
 
+  &__title,
+  &__serial,
+  &__type,
+  &__specification,
+  &__guarantee span,
+  &__prices span,
   &__order span {
     display: block;
     max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .product-card {
+    grid-template-columns:
+      18px
+      52px
+      minmax(0, 1.4fr)
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+    align-items: flex-start;
+
+    &__status-wrap {
+      padding-top: 16px;
+    }
+
+    &__main,
+    &__meta,
+    &__guarantee {
+      align-self: center;
+    }
+
+    &__prices,
+    &__order {
+      grid-column: 3 / -1;
+      padding-top: 10px;
+      border-top: 1px solid #f1f5f9;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .product-card {
+    min-height: auto;
+    padding: 14px;
+    grid-template-columns: 14px 42px minmax(0, 1fr);
+    align-items: flex-start;
+    gap: 12px;
+
+    &__status-wrap {
+      padding-top: 15px;
+    }
+
+    &__image {
+      width: 40px;
+      height: 40px;
+    }
+
+    &__main {
+      align-self: center;
+    }
+
+    &__meta,
+    &__guarantee,
+    &__prices,
+    &__order {
+      grid-column: 3 / 4;
+      min-width: 0;
+    }
+
+    &__meta {
+      margin-top: 4px;
+    }
+
+    &__guarantee,
+    &__prices,
+    &__order {
+      padding-top: 8px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    &__title,
+    &__type,
+    &__specification,
+    &__order span {
+      display: -webkit-box;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    &__serial,
+    &__guarantee span,
+    &__prices span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    grid-template-columns: 14px minmax(0, 1fr);
+
+    &__image {
+      display: none;
+    }
+
+    &__main,
+    &__meta,
+    &__guarantee,
+    &__prices,
+    &__order {
+      grid-column: 2 / 3;
+    }
   }
 }
