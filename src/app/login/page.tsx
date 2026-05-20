@@ -80,8 +80,8 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="container py-5">
-      <div className="row justify-content-center">
+    <main className="container min-vh-100 d-flex align-items-center justify-content-center py-5">
+      <div className="row justify-content-center w-100">
         <div className="col-12 col-md-6 col-lg-4">
           <div className="card shadow-sm">
             <div className="card-body">
